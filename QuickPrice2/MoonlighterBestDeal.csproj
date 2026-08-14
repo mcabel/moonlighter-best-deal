@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>QuickPrice</AssemblyName>
+    <RootNamespace>QuickPrice</RootNamespace>
+    <Product>QuickPrice</Product>
+    <Version>0.2.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- AssemblyInfo.cs below carries the original mod's exact version/product metadata. -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- BepInEx.Core, BepInEx.PluginInfoProps and UnityEngine.Modules are only published on
+         BepInEx's own feed (https://nuget.bepinex.dev), not on nuget.org - see NuGet.Config. -->
+    <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
+    <PackageReference Include="HarmonyX" Version="2.7.0" />
+    <PackageReference Include="UnityEngine.Modules" Version="2019.2.20" IncludeAssets="compile" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The actual Moonlighter game assembly, needed to resolve types like ShowcaseSlotGUI,
+         NotebookPanel, ItemPriceManager, etc. Never redistributed/copied to output.
+         Points at the repo-root copy rather than duplicating the 3.9MB file under this folder. -->
+    <Reference Include="Assembly-CSharp">
+      <HintPath>../Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
